@@ -17,6 +17,5 @@ class minioClient:
     )
 
   def listFiles(self, bucketName, prefixName):
-    recursive = False
-    listObjects = self.__minio.list_objects(bucketName, prefix=prefixName, recursive=recursive)
+    listObjects = self.__minio.list_objects(bucketName, prefix=prefixName)
     return listObjects
