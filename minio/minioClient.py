@@ -15,3 +15,8 @@ class minioClient:
       secret_key=minioSecretKey,
       secure=True
     )
+
+  def listFiles(self, bucketName, prefixName):
+    recursive = False
+    listObjects = self.__minio.list_objects(bucketName, prefix=prefixName, recursive=recursive)
+    return listObjects
