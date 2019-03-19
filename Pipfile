@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 django = "==2.1.7"
 mysqlclient = "==1.4.2"
+minio = "==4.0.11"
+djangorestframework = "==3.9.2"
 
 [requires]
 python_version = "3.7"
