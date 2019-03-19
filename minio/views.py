@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from .minioClient import minioClient
+from .serializers import MinioMetadataSerializer
 
 class MinioFileSet(APIView):
   __minioClient = None
@@ -23,4 +24,5 @@ class MinioFileSet(APIView):
         },
       listObjects
     ))
-    return
+    result = MinioMetadataSerializer(listNewObjects, many=True).data
+    return Response(result)
