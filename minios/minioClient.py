@@ -1,5 +1,6 @@
 from django.conf import settings
 from minio import Minio
+from minio.error import ResponseError
 
 class minioClient:
   __minio = None
@@ -19,3 +20,13 @@ class minioClient:
   def listFiles(self, bucketName, prefixName):
     listObjects = self.__minio.list_objects(bucketName, prefix=prefixName)
     return listObjects
+
+  def get(self, bucketName, objectName):
+    minioObject = None
+    data = None
+    try:
+      minioObject = self.__minio.get_object(bucketName, objectName)
+      data = minioObject.data.decode('utf-8')
+    except ResponseError as err:
+      print(err)
+    return data
