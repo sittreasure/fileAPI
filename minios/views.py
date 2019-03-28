@@ -17,8 +17,11 @@ class MinioFileSet(APIView):
   def get(self, request):
     result = None
     objectName = request.GET.get('object_name', '')
-    if len(objectName) == 0:
+    if len(objectName) != 0:
       data = self.__minioClient.get(bucketName, objectName)
+      data = {
+        'object_data': data
+      }
       result = MinioDataSerializer(data, many=False).data
       pass
     else:
