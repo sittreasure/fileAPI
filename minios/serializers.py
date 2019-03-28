@@ -5,4 +5,4 @@ class MinioMetadataSerializer(serializers.Serializer):
   is_dir = serializers.BooleanField()
 
 class MinioDataSerializer(serializers.Serializer):
-  data = serializers.CharField()
+  object_data = serializers.CharField()
