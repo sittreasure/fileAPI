@@ -1,15 +1,18 @@
 FROM python:3.7
 
-# Set work directory
-WORKDIR /app
-
 ENV PYTHONUNBUFFERED 1
 
-RUN pip install --upgrade pip && pip install pipenv
-ADD . /app
+RUN mkdir /code
 
-RUN pipenv install --deploy --system
+WORKDIR /code
 
-EXPOSE 8000
+COPY requirements.txt /code/
 
-ENTRYPOINT ["pipenv","run","python","manage.py","runserver"]
+RUN pip install -r requirements.txt
+
+COPY . /code/
+
+EXPOSE 8080
+
+ENTRYPOINT [ "python","manage.py","runserver","0.0.0.0:8080" ]
+# ENTRYPOINT ["pipenv","run","python","manage.py","runserver"]
