@@ -7,7 +7,7 @@ from .serializers import MinioMetadataSerializer, MinioDataSerializer
 
 bucketName = 'mockjsp'
 
-class MinioFileSet(APIView):
+class MinioFileView(APIView):
   __minioClient = None
 
   def __init__(self, **kwargs):
