@@ -20,7 +20,7 @@ class MinioFileView(APIView):
     if len(objectName) != 0:
       data = self.__minioClient.get(bucketName, objectName)
       data = {
-        'object_data': data
+        'data': data
       }
       result = MinioDataSerializer(data, many=False).data
       pass
@@ -30,8 +30,8 @@ class MinioFileView(APIView):
       listNewObjects = list(map(
         lambda object:
           {
-            'object_name': object.object_name,
-            'is_dir': object.is_dir
+            'name': object.object_name,
+            'isDir': object.is_dir
           },
         listObjects
       ))
