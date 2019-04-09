@@ -1,18 +1,17 @@
 FROM python:3.7
 
+WORKDIR /app
+
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /code
+RUN pip install --upgrade pip && pip install pipenv
+ADD . /app
 
-WORKDIR /code
+RUN pipenv install
 
-COPY requirements.txt /code/
+RUN pipenv install --deploy --system
 
-RUN pip install -r requirements.txt
+EXPOSE 8000
 
-COPY . /code/
-
-EXPOSE 8080
-
-ENTRYPOINT [ "python","manage.py","runserver","0.0.0.0:8080" ]
+ENTRYPOINT [ "uwsgi", "--ini", "fileAPI.ini" ]
 # ENTRYPOINT ["pipenv","run","python","manage.py","runserver"]
