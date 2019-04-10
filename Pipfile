@@ -11,7 +11,7 @@ mysqlclient = "==1.4.2"
 minio = "==4.0.11"
 djangorestframework = "==3.9.2"
 django-cors-headers = "==2.5.2"
-py-eureka-client = "*"
+py-eureka-client = "==0.5.5"
 
 [requires]
 python_version = "3.7"
