@@ -13,5 +13,4 @@ RUN pipenv install --deploy --system
 
 EXPOSE 8000
 
-ENTRYPOINT [ "uwsgi", "--ini", "fileAPI.ini" ]
-# ENTRYPOINT ["pipenv","run","python","manage.py","runserver"]
+ENTRYPOINT ["python","manage.py","runserver"]
