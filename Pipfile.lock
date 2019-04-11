@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fa2b0dd4844c8ca78e38a355280010f256faefe1fa437ce26ea3fd59034503e0"
+            "sha256": "60a6d38b8f5d68097fca5b032deae19447b33d5f37e2e75d900b4692815bd879"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -61,14 +61,6 @@
             ],
             "index": "pypi",
             "version": "==1.4.2"
-        },
-        "py-eureka-client": {
-            "hashes": [
-                "sha256:0a16f002ed2c9c08f17ff521215f449fc248e1d4ff86e903dcb71bc0eeead6d1",
-                "sha256:7900019ea8eeb306c6d7981d000ec109b358c28e21200ee729acdd9a36f4b691"
-            ],
-            "index": "pypi",
-            "version": "==0.5.5"
         },
         "python-dateutil": {
             "hashes": [
