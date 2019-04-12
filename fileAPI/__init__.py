@@ -4,9 +4,10 @@ import requests
 url = os.environ.get('GATEWAY_URL')
 name = 'fileapi'
 
-requests.post(
-  url = '{url}/services'.format(
-    url = url
+requests.put(
+  url = '{url}/services/{name}'.format(
+    url = url,
+    name = name
   ),
   data = {
     'name': name,
