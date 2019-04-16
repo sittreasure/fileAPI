@@ -31,10 +31,10 @@ class minioClient:
       print(err)
     return data
 
-  def putFile(self, bucketName, objectName, sourceObject):
+  def putFile(self, bucketName, objectName, objectSource):
     result = False
     try:
-      self.__minio.fput_object(bucketName, objectName, sourceObject)
+      self.__minio.fput_object(bucketName, objectName, objectSource)
       result = True
     except ResponseError as err:
       print(err)

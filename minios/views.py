@@ -47,12 +47,12 @@ class MinioFileView(APIView):
     objectData = body['objectData']
     name = body['name']
     objectName = name.split('/')
-    sourceObject = './temp/{name}'.format(name = objectName[len(objectName) - 1])
-    file = open(sourceObject, "w")
+    objectSource = './temp/{name}'.format(name = objectName[len(objectName) - 1])
+    file = open(objectSource, "w")
     file.write(objectData)
     file.close()
-    result = self.__minioClient.putFile(bucketName, name, sourceObject)
-    os.remove(sourceObject)
+    result = self.__minioClient.putFile(bucketName, name, objectSource)
+    os.remove(objectSource)
     data = {
       'result': result
     }
