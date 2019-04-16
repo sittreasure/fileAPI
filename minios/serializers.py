@@ -6,3 +6,6 @@ class MinioMetadataSerializer(serializers.Serializer):
 
 class MinioDataSerializer(serializers.Serializer):
   data = serializers.CharField()
+
+class MinioResultSerializer(serializers.Serializer):
+  result = serializers.BooleanField()
