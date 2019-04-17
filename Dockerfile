@@ -12,4 +12,4 @@ RUN pipenv install --deploy --system
 EXPOSE 8080
 
 RUN chmod +x entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["sh","entrypoint.sh"]
