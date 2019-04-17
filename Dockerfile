@@ -11,6 +11,6 @@ RUN pipenv install
 
 RUN pipenv install --deploy --system
 
-EXPOSE 8000
+EXPOSE 8080
 
 ENTRYPOINT ["uwsgi","--ini","fileAPI.ini"]
