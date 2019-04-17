@@ -7,10 +7,9 @@ ENV PYTHONUNBUFFERED 1
 RUN pip install --upgrade pip && pip install pipenv
 ADD . /app
 
-RUN pipenv install
-
 RUN pipenv install --deploy --system
 
 EXPOSE 8080
 
-ENTRYPOINT ["uwsgi","--ini","fileAPI.ini"]
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
