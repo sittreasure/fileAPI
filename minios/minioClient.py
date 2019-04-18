@@ -21,7 +21,7 @@ class minioClient:
     listObjects = self.__minio.list_objects(bucketName, prefix=prefixName)
     return listObjects
 
-  def get(self, bucketName, objectName):
+  def getFile(self, bucketName, objectName):
     minioObject = None
     data = None
     try:
@@ -30,3 +30,12 @@ class minioClient:
     except ResponseError as err:
       print(err)
     return data
+
+  def putFile(self, bucketName, objectName, objectSource):
+    result = False
+    try:
+      self.__minio.fput_object(bucketName, objectName, objectSource)
+      result = True
+    except ResponseError as err:
+      print(err)
+    return result
