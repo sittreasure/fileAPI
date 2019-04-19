@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import FileType
+from .serializers import FileTypeSerializer
+
+class FileTypeViewSet(viewsets.ModelViewSet):
+  queryset = FileType.objects.all()
+  serializer_class = FileTypeSerializer
