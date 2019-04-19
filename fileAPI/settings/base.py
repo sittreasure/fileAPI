@@ -41,11 +41,12 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
 ]
 
 LOCAL_APPS = [
-    'minios'
+    'minios',
+    'file',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
