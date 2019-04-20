@@ -5,4 +5,4 @@ from .models import FileType
 class FileTypeSerializer(serializers.ModelSerializer):
   class Meta:
     model = FileType
-    fields = '__all__'
+    fields = ('id', 'name', 'regularExpression', 'fileType', 'initialCode')
