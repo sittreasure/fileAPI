@@ -39,3 +39,12 @@ class minioClient:
     except ResponseError as err:
       print(err)
     return result
+
+  def removeFile(self, bucketName, objectName):
+    result = False
+    try:
+      self.__minio.remove_object(bucketName, objectName)
+      result = True
+    except ResponseError as err:
+      print(err)
+    return result
