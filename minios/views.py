@@ -25,7 +25,6 @@ class MinioFileView(APIView):
         'data': data
       }
       result = MinioDataSerializer(data, many=False).data
-      pass
     else:
       prefixName = request.GET.get('prefix_name')
       listObjects = self.__minioClient.listFiles(bucketName, prefixName)
@@ -38,7 +37,6 @@ class MinioFileView(APIView):
         listObjects
       ))
       result = MinioMetadataSerializer(listNewObjects, many=True).data
-      pass
     return Response(result)
 
   def post(self, request):
@@ -53,6 +51,15 @@ class MinioFileView(APIView):
     file.close()
     result = self.__minioClient.putFile(bucketName, name, objectSource)
     os.remove(objectSource)
+    data = {
+      'result': result
+    }
+    result = MinioResultSerializer(data, many=False).data
+    return Response(result)
+
+  def delete(self, request):
+    objectName = request.GET.get('object_name', '')
+    result = self.__minioClient.removeFile(bucketName, objectName)
     data = {
       'result': result
     }
