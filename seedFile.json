@@ -6,9 +6,105 @@
     "name": "Servlet",
     "regularExpression": "^[A-Z][0-9A-Za-z]*",
     "fileType": "java",
-    "initialCode": "import javax.servlet.*;\\n\\n@WebServlet( name = \u201c${name}\u201d, urlPatterns = \"/${name}\" )\\npublic class ${name} extends HttpServlet {\\n\\tprotected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\\n\\t\\tresponse.setContentType(\"text/html;charset=UTF-8\");\\n\\t\\ttry {\\n\\t\\t\\tPrintWriter out = response.getWriter();\\n\\t\\t\\tout.println(\"<!DOCTYPE html>\"); out.println(\"<html>\");\\n\\t\\t\\tout.println(\"<head>\");\\n\\t\\t\\tout.println(\"<title>W3adda.com Servlet Test</title>\");\\n\\t\\t\\tout.println(\"</head>\");\\n\\t\\t\\tout.println(\"<body>\");\\n\\t\\t\\tout.println(\"<h1>Servlet TestServlet at \" + request.getContextPath() + \"</h1>\");\\n\\t\\t\\tout.println(\"</body>\");\\n\\t\\t\\tout.println(\"</html>\");\\n\\t\\t} finally {\\n\\t\\t\\tout.close();\\n\\t\\t}\\n\\t}\\n\\n\\t@Override protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\\n\\t\\tprocessRequest(request, response);\\n\\t}\\n\\n\\t@Override protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\\n\\t\\tprocessRequest(request, response);\\n\\t}\\n}",
+    "initialCode": "import java.io.*;\\nimport javax.servlet.*;\\n\\n@WebServlet( name = \u201c${name}\u201d, urlPatterns = \"/${name}\" )\\npublic class ${name} extends HttpServlet {\\n\\tprotected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\\n\\t\\tresponse.setContentType(\"text/html;charset=UTF-8\");\\n\\t\\ttry {\\n\\t\\t\\tPrintWriter out = response.getWriter();\\n\\t\\t\\tout.println(\"<!DOCTYPE html>\"); out.println(\"<html>\");\\n\\t\\t\\tout.println(\"<head>\");\\n\\t\\t\\tout.println(\"<title>W3adda.com Servlet Test</title>\");\\n\\t\\t\\tout.println(\"</head>\");\\n\\t\\t\\tout.println(\"<body>\");\\n\\t\\t\\tout.println(\"<h1>Servlet TestServlet at \" + request.getContextPath() + \"</h1>\");\\n\\t\\t\\tout.println(\"</body>\");\\n\\t\\t\\tout.println(\"</html>\");\\n\\t\\t} finally {\\n\\t\\t\\tout.close();\\n\\t\\t}\\n\\t}\\n\\n\\t@Override\\n\\tprotected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\\n\\t\\tprocessRequest(request, response);\\n\\t}\\n\\n\\t@Override\\n\\tprotected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\\n\\t\\tprocessRequest(request, response);\\n\\t}\\n}",
     "createdAt": "2019-04-19T22:30:00Z",
     "updatedAt": "2019-04-19T22:30:00Z"
+  }
+},
+{
+  "model": "file.filetype",
+  "pk": 2,
+  "fields": {
+    "name": "Java",
+    "regularExpression": "^[A-Z][0-9A-Za-z]*",
+    "fileType": "java",
+    "initialCode": "public class ${name} {\\n\\n}",
+    "createdAt": "2019-04-26T05:16:21.638Z",
+    "updatedAt": "2019-04-26T05:16:21.638Z"
+  }
+},
+{
+  "model": "file.filetype",
+  "pk": 3,
+  "fields": {
+    "name": "HTML",
+    "regularExpression": "^[a-z][0-9a-zA-Z-_]*",
+    "fileType": "html",
+    "initialCode": "<!DOCTYPE html>\\n<html lang=\"en\u201d>\\n\\t<head>\\n\\t\\t<meta charset=\"UTF-8\">\\n\\t\\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\\n\\t\\t<title>TODO supply a title</title>\\n\\t</head>\\n\\t<body>\\n\\t\\t<div>TODO write content</div>\\n\\t</body>\\n</html>",
+    "createdAt": "2019-04-26T05:22:45.382Z",
+    "updatedAt": "2019-04-26T05:22:45.382Z"
+  }
+},
+{
+  "model": "file.filetype",
+  "pk": 4,
+  "fields": {
+    "name": "CSS",
+    "regularExpression": "^[a-z][0-9a-z-_]*",
+    "fileType": "css",
+    "initialCode": "",
+    "createdAt": "2019-04-26T05:31:06.543Z",
+    "updatedAt": "2019-04-26T05:31:06.543Z"
+  }
+},
+{
+  "model": "file.filetype",
+  "pk": 5,
+  "fields": {
+    "name": "JavaScript",
+    "regularExpression": "^[a-zA-Z][0-9a-zA-Z-_]*",
+    "fileType": "js",
+    "initialCode": "",
+    "createdAt": "2019-04-26T05:33:25.805Z",
+    "updatedAt": "2019-04-26T05:33:25.806Z"
+  }
+},
+{
+  "model": "file.filetype",
+  "pk": 6,
+  "fields": {
+    "name": "JSP",
+    "regularExpression": "^[a-z][0-9a-zA-Z-_]*",
+    "fileType": "jsp",
+    "initialCode": "<%@page contentType=\"text/html\" pageEncoding=\"UTF-8\u201d%>\\n<!DOCTYPE html>\\n<html>\\n\\t<head>\\n\\t\\t<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\\n\\t\\t<title>JSP Page</title>\\n\\t</head>\\n\\t<body>\\n\\t\\t<div>Hello World!</div>\\n\\t</body>\\n</html>",
+    "createdAt": "2019-04-26T05:35:30.372Z",
+    "updatedAt": "2019-04-26T05:35:30.372Z"
+  }
+},
+{
+  "model": "file.filetype",
+  "pk": 7,
+  "fields": {
+    "name": "Tag",
+    "regularExpression": "^[a-z][0-9a-zA-Z-_]*",
+    "fileType": "tag",
+    "initialCode": "<%@tag description=\"put the tag description here\" pageEncoding=\"UTF-8%>\\n\\n<%@attribute name=\"message\u201d%>\\n\\n<h2>${message}</h2>",
+    "createdAt": "2019-04-26T06:00:55.627Z",
+    "updatedAt": "2019-04-26T06:00:55.628Z"
+  }
+},
+{
+  "model": "file.filetype",
+  "pk": 8,
+  "fields": {
+    "name": "TLD",
+    "regularExpression": "^[a-z][0-9a-zA-Z-_]*",
+    "fileType": "tld",
+    "initialCode": "<?xml version=\"1.0\" encoding=\"UTF-8\u201d?>\\n<taglib version=\"2.1\" xmlns=\"http://java.sun.com/xml/ns/javaee\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd\u201d>\\n\\t<tlib-version>1.0</tlib-version>\\n\\t<short-name>${name}</short-name>\\n\\t<uri>/WEB-INF/${name}</uri>\\n</taglib>",
+    "createdAt": "2019-04-26T06:02:45.671Z",
+    "updatedAt": "2019-04-26T06:02:45.671Z"
+  }
+},
+{
+  "model": "file.filetype",
+  "pk": 9,
+  "fields": {
+    "name": "Tag Handler",
+    "regularExpression": "^[A-Z][0-9A-Za-z]*",
+    "fileType": "java",
+    "initialCode": "import java.io.*;\\nimport javax.servlet.*;\\n\\npublic class ${name} extends SimpleTagSupport {\\n\\tpublic void doTag() throws JspException, IOException {\\n\\t\\tJspWritter out = getJspContext().getOut();\\n\\t\\tout.println(\"Hello Custom Tag!\u201d);\\n\\t}\\n}",
+    "createdAt": "2019-04-26T06:12:20.048Z",
+    "updatedAt": "2019-04-26T06:12:20.048Z"
   }
 }
 ]
