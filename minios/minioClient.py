@@ -17,6 +17,28 @@ class minioClient:
       secure=True
     )
 
+  def existBucket(self, bucketName):
+    result = False
+    try:
+      exist = self.__minio.bucket_exists(bucketName)
+      print('>>> [minioClient.py:24] exist : ', exist)
+      if exist:
+        result = True
+      else:
+        result = False
+    except ResponseError as err:
+      print(err)
+    return result
+
+  def createBucket(self, bucketName):
+    result = False
+    try:
+      self.__minio.make_bucket(bucketName)
+      result = True
+    except ResponseError as err:
+      print(err)
+    return result
+
   def listFiles(self, bucketName, prefixName):
     listObjects = self.__minio.list_objects(bucketName, prefix=prefixName)
     return listObjects
