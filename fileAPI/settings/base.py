@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'base',
     'minios',
     'file',
 ]
@@ -60,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'base.middlewares.VerifyJwtMiddleware',
 ]
 
 ROOT_URLCONF = 'fileAPI.urls'
@@ -142,3 +145,8 @@ STATIC_URL = '/static/'
 MINIO_URL = os.environ.get('MINIO_URL')
 MINIO_ACCESS_KEY = os.environ.get('MINIO_ACCESS_KEY')
 MINIO_SECRET_KEY = os.environ.get('MINIO_SECRET_KEY')
+
+JWT_AUTH = {
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    'JWT_SECRET_KEY': os.environ.get('JWT_SECRET_KEY'),
+}
