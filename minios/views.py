@@ -6,8 +6,35 @@ import os
 
 from .minioClient import minioClient
 from .serializers import MinioMetadataSerializer, MinioDataSerializer, MinioResultSerializer
+from base.jwt import getUserId
 
 bucketName = 'mockjsp'
+
+class MinioBucketView(APIView):
+  __minioClient = None
+
+  def __init__(self, **kwargs):
+    super().__init__(**kwargs)
+    self.__minioClient = minioClient()
+
+  def post(self, request):
+    userId = getUserId(request)
+    userId = str(userId)
+    print('>>> [views.py:22] userId : ', userId)
+    existBucket = self.__minioClient.existBucket(userId)
+    data = None
+    if existBucket:
+      data = {
+        'result': existBucket
+      }
+    else:
+      createBucket = self.__minioClient.createBucket(userId)
+      data = {
+        'result': createBucket
+      }
+    result = MinioResultSerializer(data, many=False).data
+    return Response(result)
+
 
 class MinioFileView(APIView):
   __minioClient = None
