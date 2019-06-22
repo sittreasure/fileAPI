@@ -1,14 +1,15 @@
+import json
+import os
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
-import json
-import os
 
 from .minioClient import minioClient
 from .serializers import MinioMetadataSerializer, MinioDataSerializer, MinioResultSerializer
 from base.jwt import getUserId
 
 bucketName = 'mockjsp'
+coreBucket = 'core'
 
 class MinioBucketView(APIView):
   __minioClient = None
@@ -20,7 +21,6 @@ class MinioBucketView(APIView):
   def post(self, request):
     userId = getUserId(request)
     userId = str(userId)
-    print('>>> [views.py:22] userId : ', userId)
     existBucket = self.__minioClient.existBucket(userId)
     data = None
     if existBucket:
@@ -35,6 +35,29 @@ class MinioBucketView(APIView):
     result = MinioResultSerializer(data, many=False).data
     return Response(result)
 
+class MinioFolderView(APIView):
+  __minioClient = None
+
+  def __init__(self, **kwargs):
+    super().__init__(**kwargs)
+    self.__minioClient = minioClient()
+
+  def get(self, request):
+    userId = getUserId(request)
+    userId = str(userId)
+    folderName = request.GET.get('folder_name', '')
+    listFiles = self.__minioClient.listFiles(coreBucket, folderName, True)
+    success = False
+    for fileName in listFiles:
+      objectName = fileName.object_name
+      success = self.__minioClient.copyFile(coreBucket, objectName, userId, objectName)
+      if not success:
+        break
+    data = {
+      'result': success
+    }
+    result = MinioResultSerializer(data, many=False).data
+    return Response(result)
 
 class MinioFileView(APIView):
   __minioClient = None
