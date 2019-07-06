@@ -8,7 +8,6 @@ from .minioClient import minioClient
 from .serializers import MinioMetadataSerializer, MinioDataSerializer, MinioResultSerializer
 from base.jwt import getUserId
 
-bucketName = 'mockjsp'
 coreBucket = 'core'
 
 class MinioBucketView(APIView):
@@ -67,6 +66,8 @@ class MinioFileView(APIView):
     self.__minioClient = minioClient()
 
   def get(self, request):
+    userId = getUserId(request)
+    bucketName = str(userId)
     result = None
     objectName = request.GET.get('object_name', '')
     if len(objectName) != 0:
@@ -90,6 +91,8 @@ class MinioFileView(APIView):
     return Response(result)
 
   def post(self, request):
+    userId = getUserId(request)
+    bucketName = str(userId)
     body_unicode = request.body.decode('utf-8')
     body = json.loads(body_unicode)
     objectData = body['objectData']
@@ -108,6 +111,8 @@ class MinioFileView(APIView):
     return Response(result)
 
   def delete(self, request):
+    userId = getUserId(request)
+    bucketName = str(userId)
     objectName = request.GET.get('object_name', '')
     result = self.__minioClient.removeFile(bucketName, objectName)
     data = {
