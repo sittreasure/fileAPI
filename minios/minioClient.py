@@ -1,6 +1,6 @@
 from django.conf import settings
 from minio import Minio
-from minio.error import ResponseError
+from minio.error import ResponseError, BucketAlreadyOwnedByYou
 
 class minioClient:
   __minio = None
@@ -33,6 +33,8 @@ class minioClient:
     result = False
     try:
       self.__minio.make_bucket(bucketName)
+      result = True
+    except BucketAlreadyOwnedByYou:
       result = True
     except ResponseError as err:
       print(err)
