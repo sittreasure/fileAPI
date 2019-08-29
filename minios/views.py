@@ -77,6 +77,9 @@ class MinioFileView(APIView):
       }
       result = MinioDataSerializer(data, many=False).data
     else:
+      existBucket = self.__minioClient.existBucket(bucketName)
+      if not existBucket:
+        createBucket = self.__minioClient.createBucket(bucketName)
       prefixName = request.GET.get('prefix_name')
       listObjects = self.__minioClient.listFiles(bucketName, prefixName)
       listNewObjects = list(map(
