@@ -1,6 +1,6 @@
 from django.conf import settings
 from minio import Minio
-from minio.error import ResponseError
+from minio.error import ResponseError, BucketAlreadyOwnedByYou
 
 class minioClient:
   __minio = None
@@ -17,8 +17,31 @@ class minioClient:
       secure=True
     )
 
-  def listFiles(self, bucketName, prefixName):
-    listObjects = self.__minio.list_objects(bucketName, prefix=prefixName)
+  def existBucket(self, bucketName):
+    result = False
+    try:
+      exist = self.__minio.bucket_exists(bucketName)
+      if exist:
+        result = True
+      else:
+        result = False
+    except ResponseError as err:
+      print(err)
+    return result
+
+  def createBucket(self, bucketName):
+    result = False
+    try:
+      self.__minio.make_bucket(bucketName)
+      result = True
+    except BucketAlreadyOwnedByYou:
+      result = True
+    except ResponseError as err:
+      print(err)
+    return result
+
+  def listFiles(self, bucketName, prefixName, recursive=False):
+    listObjects = self.__minio.list_objects(bucketName, prefix=prefixName, recursive=recursive)
     return listObjects
 
   def getFile(self, bucketName, objectName):
@@ -35,6 +58,16 @@ class minioClient:
     result = False
     try:
       self.__minio.fput_object(bucketName, objectName, objectSource)
+      result = True
+    except ResponseError as err:
+      print(err)
+    return result
+
+  def copyFile(self, sourceBucketName, sourceFileName, destinationBucketName, destinationFileName):
+    result = False
+    try:
+      sourceFile = '/{bucketName}/{fileName}'.format(bucketName=sourceBucketName, fileName=sourceFileName)
+      self.__minio.copy_object(destinationBucketName, destinationFileName, sourceFile)
       result = True
     except ResponseError as err:
       print(err)
